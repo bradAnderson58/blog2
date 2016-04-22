@@ -1,4 +1,6 @@
 
+hljs.initHighlightingOnLoad();  // is this what I do?
+
 // public/script.js
 window.onload = function() {
 
@@ -12,9 +14,14 @@ window.onload = function() {
     var markdownText = pad.value;
     html = converter.makeHtml(markdownText);
     markdownArea.innerHTML = html;
+
+    // we also want to run hihglight syntax
+   hljs.initHighlighting.called = false;
+   hljs.initHighlighting();
   };
 
   pad.addEventListener('input', convertTextAreaToMarkdown);
 
   convertTextAreaToMarkdown();
+
 }

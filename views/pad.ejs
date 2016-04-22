@@ -8,6 +8,9 @@
   <title>Realtime Markdown Viewer</title>
   <!-- bootstrap here -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <!-- syntax highlighting -->
+  <link
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 </head>
 
@@ -19,12 +22,39 @@
 Markdown: [Google It](https:www.google.com) bitch
 
 ![alt text](winter.jpeg "winter is coming")
+
+Some syntax highlighting examples:
+
+```java
+// Im Java code, look at me!
+public class MyThread extends Thread {
+  public void run() {
+    System.out.println("Im Mr. Meeseks, look at ME!");
+    (new MyThread()).start();
+  }
+
+  public static void main(String args[]) {
+    (new MyThread()).start();
+  }
+}
+```
+```python
+# this is a python comment
+def fib(n):
+    return (n < 2) ? n : fib(n-1) + fib(n-2)
+```
+```javascript
+// I know what you really meant
+window.location = "meatspin.com";
+```
+
     </textarea>
     <div class="col-md-6 full-height" id="markdown"></div>
   </section>
 
   <!-- import showdown to convert to html in real time yo! -->
   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.2/dist/showdown.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
