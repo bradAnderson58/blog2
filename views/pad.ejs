@@ -15,7 +15,9 @@
 </head>
 
 <body class="container-fluid">
+
   <section class="row">
+    <button id='postShit' onclick='postData()'>Send me</button>
     <textarea class="col-md-6 full-height" id="pad">
 
 #this is a Title Brah!
@@ -41,7 +43,7 @@ public class MyThread extends Thread {
 ```python
 # this is a python comment
 def fib(n):
-    return (n < 2) ? n : fib(n-1) + fib(n-2)
+    return n if n < 2 else fib(n-1) + fib(n-2)
 ```
 ```javascript
 // I know what you really meant
