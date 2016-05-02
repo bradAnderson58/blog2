@@ -1,2 +1,3 @@
+*.sublime-workspace
 gulpfile.js
 node_modules/
