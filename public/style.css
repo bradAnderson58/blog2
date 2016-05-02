@@ -28,7 +28,7 @@ html, body, section, .full-height {
   background-color: #e1e1e1;
 }
 .pont-headers {
-  height: 35%;
+  height: 30%;
   padding: 0;
   text-align: center;
 }
@@ -48,10 +48,26 @@ html, body, section, .full-height {
 }
 
 .pont-pic {
-  height: 100%;
+  height: 150%;
   float: left;
 }
 .pont-pic-right {
-  height: 100%;
+  height: 150%;
   float: right;
+}
+
+.bp-archive {
+  background: #ace5ac;
+  margin-top: 5px;
+  width: 25.8%;
+  border-right: 1px solid black;
+  border-top-left-radius: 3px;
+}
+.bp-poast {
+  background: #ace5ac;
+  margin-top: 5px;
+  border-top-right-radius: 3px;
+}
+.bp-betterfont {
+  font-family: 'Arvo', serif;
 }
