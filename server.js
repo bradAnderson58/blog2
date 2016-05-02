@@ -3,6 +3,7 @@
 // post schema from the blog model
 var mongoose = require('mongoose');
 var Post = require('./Models/blog');
+var Utils = require('./utils.js');
 
 // import the packages we will need
 var express = require('express');
@@ -42,14 +43,17 @@ router.route('/post')
   // create the post request
   .post(function(req, res) {
 
-    var post = new Post();
-    post.title = req.body.title;
-    post.blog = req.body.blog;
+    // verify sender
     var name = req.body.name;
     var pass = req.body.pass;
-
-    // if statement, we need to to some checking here
     if (name === theName && pass === thePass) {
+      var post = new Post();
+      post.title = req.body.title;
+      post.blog = req.body.blog;
+      post.updated_at.year = req.body.year;
+      post.updated_at.month = req.body.month;
+      post.updated_at.day = req.body.day;
+
       post.save(function(err) {
         if (err)
          res.send(err);
@@ -64,11 +68,12 @@ router.route('/post')
 // Get request for all the titles
 // this will be used to print a list of all the titles
 router.route('/titles').get(function(req, res) {
-
-  Post.find({}, {title: 1, _id: 0}, function(err, data) {
+  // dont forget this syntax: Post.find({}, {title: 1, _id: 0}, function(err, data) {
+  Post.find({}, function(err, data) {
     if (err) throw err;
 
-    res.json(data);
+    var timeSorted = Utils.sortByTime(data);
+    res.json(timeSorted);
   });
 
 });

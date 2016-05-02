@@ -32,11 +32,19 @@ function postPopup() {
   var whodat = prompt("whodat", "whodis");
   var secret = prompt("whatitdo", "son");
   var title = prompt('title', 'Poast');
-  postData(whodat, secret, title);
+  var date = prompt('date', 'yyyy mm dd');
+  postData(whodat, secret, title, date);
 }
 
 // post whatever data you have
-function postData(whodat, secret, t) {
+function postData(whodat, secret, t, date) {
+
+  // parse the date from yyyy mm dd format
+  var splitted = date.split(' ');
+  if (splitted.length < 3) {
+    alert('you didnt enter a complete date pussy');
+    return;
+  }
 
   var http = new XMLHttpRequest();
   var url = 'http://192.168.152.132:8000/api/post';
@@ -53,6 +61,9 @@ function postData(whodat, secret, t) {
   var data = {
     title: t,
     blog: pad.value,
+    year: splitted[0],
+    month: splitted[1],
+    day: splitted[2],
     name: whodat,
     pass: secret
   }

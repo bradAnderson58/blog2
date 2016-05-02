@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var BlogSchema = new Schema({
   title: String,
   blog: String,
-  updated_at: {type: Date, default: Date.now}
+  updated_at: {
+    month: Number,
+    day: Number,
+    year: Number
+  }
 });
 
 module.exports = mongoose.model('archive', BlogSchema);

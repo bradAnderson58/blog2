@@ -7,9 +7,8 @@ window.onload = function() {
   var titleCont;
 
   var http = new XMLHttpRequest();
-  var url = 'http://192.168.152.132:8000/api/titles';
+  var url = 'http://' + location.hostname + ':8000/api/titles';
   http.onreadystatechange = function() {
-    console.log("send");
     if (http.readyState === 4 && http.status === 200){
       var msg = JSON.parse(http.response);
       populateList(msg);
@@ -19,17 +18,41 @@ window.onload = function() {
   http.open('GET', url, true);
   http.setRequestHeader('Content-Type', 'application/json');
   http.send();
-
-  // stick them all in #stickit
 }
 
-
+// stick them all in #stickit
 function populateList(msg) {
   titleCont = document.getElementById('stickit');
-  console.log(msg.length);
-  for (var i = 0; i < msg.length; ++i) {
-    console.log(msg[i].title);
-    titleCont.innerHTML += msg[i].title;
-    titleCont.innerHTML += '<br>';
-  }
+
+  msg.forEach(function(year, index, msg) {
+    titleCont.innerHTML += year.year + "<br>";
+    insertPostLinks(titleCont, year);
+    //titleCont.interHTML += '<br>';
+  });
 }
+
+function insertPostLinks(container, year) {
+  year.posts.forEach(function(post, index, yearposts) {
+    container.innerHTML += "- " + post.title + "<br>";
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
