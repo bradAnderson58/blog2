@@ -31,24 +31,27 @@ var postbtn = document.getElementById('postShit');
 function postPopup() {
   var whodat = prompt("whodat", "whodis");
   var secret = prompt("whatitdo", "son");
-  postData(whodat, secret);
+  var title = prompt('title', 'Poast');
+  postData(whodat, secret, title);
 }
 
 // post whatever data you have
-function postData(whodat, secret) {
-  console.log(pad.value);
+function postData(whodat, secret, t) {
+
   var http = new XMLHttpRequest();
   var url = 'http://192.168.152.132:8000/api/post';
   http.onreadystatechange = function() {
     console.log("send");
-    if (http.readyState === 4 && http.status === 200)
-      alert(http.responseText);
+    if (http.readyState === 4 && http.status === 200) {
+      var msg = JSON.parse(http.response);
+      alert(msg.message);
+    }
   }
 
   http.open('POST', url, true);
   http.setRequestHeader('Content-Type', 'application/json');
   var data = {
-    title: 'this is a test',
+    title: t,
     blog: pad.value,
     name: whodat,
     pass: secret

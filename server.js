@@ -61,13 +61,25 @@ router.route('/post')
     }
   });
 
+// Get request for all the titles
+// this will be used to print a list of all the titles
+router.route('/titles').get(function(req, res) {
+
+  Post.find({}, {title: 1, _id: 0}, function(err, data) {
+    if (err) throw err;
+
+    res.json(data);
+  });
+
+});
+
 app.use('/api', router);
 // routes for app
 app.get('/beditor', function(req, res) {
   res.render('pad');
 });
 app.get('/', function(req, res) {
-  res.render('test');
+  res.render('archive');
 });
 
 app.listen(port);
