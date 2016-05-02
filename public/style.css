@@ -22,3 +22,36 @@ html, body, section, .full-height {
   overflow: auto;
   border-left: 1px solid black;
 }
+
+.section-colored {
+  padding: 50px 0;
+  background-color: #e1e1e1;
+}
+.pont-headers {
+  height: 35%;
+  padding: 0;
+  text-align: center;
+}
+
+.bp-pagetop {
+  display: inline-block;
+}
+.bp-title {
+  font-size: 120px;
+  font-family: 'Tangerine', serif;
+  display: block;
+  margin-bottom: -35px;
+}
+.bp-subtitle {
+  font-family: 'Arvo', serif;
+  margin-left: 460px;
+}
+
+.pont-pic {
+  height: 100%;
+  float: left;
+}
+.pont-pic-right {
+  height: 100%;
+  float: right;
+}
