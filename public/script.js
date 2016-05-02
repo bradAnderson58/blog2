@@ -28,8 +28,14 @@ window.onload = function() {
 
 var postbtn = document.getElementById('postShit');
 
+function postPopup() {
+  var whodat = prompt("whodat", "whodis");
+  var secret = prompt("whatitdo", "son");
+  postData(whodat, secret);
+}
+
 // post whatever data you have
-function postData() {
+function postData(whodat, secret) {
   console.log(pad.value);
   var http = new XMLHttpRequest();
   var url = 'http://192.168.152.132:8000/api/post';
@@ -43,7 +49,9 @@ function postData() {
   http.setRequestHeader('Content-Type', 'application/json');
   var data = {
     title: 'this is a test',
-    blog: pad.value
+    blog: pad.value,
+    name: whodat,
+    pass: secret
   }
 
   http.send(JSON.stringify(data));

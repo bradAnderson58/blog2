@@ -27,6 +27,8 @@ app.use(methodOverride());
 
 // listen on port 8000 or defined port
 var port = process.env.PORT || 8000;
+var theName = process.env.NAME;
+var thePass = process.env.SECRET;
 
 // middleware used for all requests
 var router = express.Router();
@@ -39,23 +41,33 @@ router.use(function(req, res, next) {
 router.route('/post')
   // create the post request
   .post(function(req, res) {
-    console.log(req.body);
+
     var post = new Post();
     post.title = req.body.title;
     post.blog = req.body.blog;
+    var name = req.body.name;
+    var pass = req.body.pass;
 
-    post.save(function(err) {
-      if (err)
-        res.send(err);
+    // if statement, we need to to some checking here
+    if (name === theName && pass === thePass) {
+      post.save(function(err) {
+        if (err)
+         res.send(err);
 
-      res.json({message: 'Created!'});
-    });
+        res.json({message: 'Created!'});
+      });
+    } else {
+      res.json({message: 'whodis?'});
+    }
   });
 
 app.use('/api', router);
 // routes for app
-app.get('/', function(req, res) {
+app.get('/beditor', function(req, res) {
   res.render('pad');
+});
+app.get('/', function(req, res) {
+  res.render('test');
 });
 
 app.listen(port);
