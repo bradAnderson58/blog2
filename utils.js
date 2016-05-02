@@ -33,6 +33,7 @@ function sortByTime(data) {
   return finalArr;
 }
 
+// make an object to sort and send to client
 function maketitleObj(poast) {
   var titleObj = {};
   titleObj.title = poast.title;
@@ -41,6 +42,7 @@ function maketitleObj(poast) {
   return titleObj;
 }
 
+// custom sort by month first, then day
 function sortPosts(a, b) {
   if (a.month < b.month)
     return 1;
@@ -54,18 +56,3 @@ function sortPosts(a, b) {
   }
   return 0;
 }
-
-/*
-  format should be
-  [
-    {
-      year: yyyy,  // these objects also sorted
-      poasts: [
-        // sorted
-      ]
-    },
-    {
-
-    }
-  ]
- */

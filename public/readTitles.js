@@ -25,16 +25,56 @@ function populateList(msg) {
   titleCont = document.getElementById('stickit');
 
   msg.forEach(function(year, index, msg) {
-    titleCont.innerHTML += year.year + "<br>";
-    insertPostLinks(titleCont, year);
-    //titleCont.interHTML += '<br>';
+    var yearspan = document.createElement('div');
+    yearspan.addEventListener('click', toggleListSize);
+    insertHeaderSpan(yearspan, year.year);
+
+    // put all the posts in this span so we can collapse them
+    var postspan = document.createElement('div');
+    postspan.className += 'bp-postlist';
+    postspan.style.display = 'none';
+
+    insertPostLinks(postspan, year);
+    yearspan.appendChild(postspan);
+
+    titleCont.appendChild(yearspan);
   });
 }
 
+// add a post link to a container
 function insertPostLinks(container, year) {
   year.posts.forEach(function(post, index, yearposts) {
-    container.innerHTML += "- " + post.title + "<br>";
+
+    var linkPost = document.createElement('a');
+    linkPost.className += 'bp-postlist-item';
+
+    var linkText = document.createTextNode(post.title);
+    linkPost.appendChild(linkText);
+    linkPost.href = 'http://google.com';
+
+    container.appendChild(linkPost);
+    container.innerHTML += "<br>";
   });
+}
+
+// add a header to a container
+function insertHeaderSpan(container, contents) {
+  var headerspan = document.createElement('div');
+  headerspan.className += 'bp-headeryear';
+  headerspan.innerHTML += contents;
+
+  container.appendChild(headerspan);
+}
+
+// callback to hide or show post list
+function toggleListSize() {
+  console.log(this.getElementsByClassName('bp-postlist'));
+  var postlist = this.getElementsByClassName('bp-postlist')[0];
+
+  if (postlist.style.display === 'none')
+    postlist.style.display = 'block';
+  else
+    postlist.style.display = 'none';
 }
 
 
