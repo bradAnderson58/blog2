@@ -11,6 +11,8 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var fs = require('fs');
+
 // set up configuration stuffs
 mongoose.connect('mongodb://localhost:27017/my_database');
 
@@ -28,8 +30,14 @@ app.use(methodOverride());
 
 // listen on port 8000 or defined port
 var port = process.env.PORT || 8000;
-var theName = process.env.NAME;
-var thePass = process.env.SECRET;
+var theName;
+var thePass;
+fs.readFile('config', 'utf8', function(err, data) {
+  if (err) return console.log(err);
+  var arr = data.split('\n');
+  theName = arr[0];
+  thePass = arr[1];
+});
 
 // middleware used for all requests
 var router = express.Router();
@@ -76,6 +84,17 @@ router.route('/titles').get(function(req, res) {
     res.json(timeSorted);
   });
 
+});
+
+// Get request for a specific post by title
+// this will return the post to be populated in the main pane
+router.route('/getpost').get(function(req, res) {
+  var title = req.query['title'];
+
+  Post.find({title: title}, function(err, data) {
+    if (err) throw err;
+    res.json(data);
+  });
 });
 
 app.use('/api', router);

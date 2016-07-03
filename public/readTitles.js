@@ -1,4 +1,4 @@
-
+hljs.initHighlightingOnLoad();
 
 window.onload = function() {
 
@@ -18,6 +18,7 @@ window.onload = function() {
   http.open('GET', url, true);
   http.setRequestHeader('Content-Type', 'application/json');
   http.send();
+
 }
 
 // stick them all in #stickit
@@ -50,7 +51,7 @@ function insertPostLinks(container, year) {
 
     var linkText = document.createTextNode(post.title);
     linkPost.appendChild(linkText);
-    linkPost.href = 'http://google.com';
+    linkPost.href = 'javascript:openPost("'+post.title+'")';
 
     container.appendChild(linkPost);
     container.innerHTML += "<br>";
@@ -75,6 +76,31 @@ function toggleListSize() {
     postlist.style.display = 'block';
   else
     postlist.style.display = 'none';
+}
+
+function openPost(name) {
+  console.log(name);
+  var http = new XMLHttpRequest();
+  var url = 'http://' + location.hostname + ':8000/api/getpost?title='+name;
+  http.onreadystatechange = function() {
+    if (http.readyState === 4 && http.status === 200){
+      var msg = JSON.parse(http.response);
+      var markdownArea = document.getElementsByClassName('bp-poast')[0];
+      var converter = new showdown.Converter();
+
+      html = converter.makeHtml(msg[0].blog);
+      markdownArea.innerHTML = html;
+
+      // we also want to run highlight syntax
+      hljs.initHighlighting.called = false;
+      hljs.initHighlighting();
+
+    }
+  }
+
+  http.open('GET', url, true);
+  http.setRequestHeader('Content-Type', 'application/json');
+  http.send(name);
 }
 
 

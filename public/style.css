@@ -4,6 +4,9 @@
 html, body, section, .full-height {
   height: 100%;
 }
+a {
+  color: #7b584a;
+}
 
 #pad {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -67,6 +70,11 @@ html, body, section, .full-height {
   background: #ace5ac;
   margin-top: 5px;
   border-top-right-radius: 3px;
+  overflow-y: scroll;
+
+}
+::-webkit-scrollbar {
+  width: 12px;
 }
 .bp-betterfont {
   font-family: 'Arvo', serif;

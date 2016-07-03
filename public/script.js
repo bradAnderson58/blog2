@@ -47,7 +47,7 @@ function postData(whodat, secret, t, date) {
   }
 
   var http = new XMLHttpRequest();
-  var url = 'http://192.168.152.132:8000/api/post';
+  var url = 'http://'+ location.hostname +':8000/api/post';
   http.onreadystatechange = function() {
     console.log("send");
     if (http.readyState === 4 && http.status === 200) {
@@ -57,6 +57,8 @@ function postData(whodat, secret, t, date) {
   }
 
   http.open('POST', url, true);
+
+  // TODO: this should be application/x-www-form-urlencoded ?
   http.setRequestHeader('Content-Type', 'application/json');
   var data = {
     title: t,
