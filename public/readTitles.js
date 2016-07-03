@@ -24,6 +24,8 @@ window.onload = function() {
 // stick them all in #stickit
 function populateList(msg) {
   titleCont = document.getElementById('stickit');
+  // page loads with the most recent post open
+  openPost(msg[0].posts[0].title);
 
   msg.forEach(function(year, index, msg) {
     var yearspan = document.createElement('div');
