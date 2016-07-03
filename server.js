@@ -55,6 +55,8 @@ router.route('/post')
     var name = req.body.name;
     var pass = req.body.pass;
     if (name === theName && pass === thePass) {
+
+      // first check if this post already exists
       var post = new Post();
       post.title = req.body.title;
       post.blog = req.body.blog;
@@ -62,11 +64,29 @@ router.route('/post')
       post.updated_at.month = req.body.month;
       post.updated_at.day = req.body.day;
 
-      post.save(function(err) {
-        if (err)
-         res.send(err);
+      Post.find({title: req.body.title}, function(err, data) {
+        if (err) console.log(err);
+        if (data.length !== 0) {
+          console.log('already exists, updating');
+          Post.update({title: post.title}, {
+              blog: post.blog,
+              updated_at: post.updated_at
+            }, function(err, data) {
+              if (err)
+                res.send(err);
 
-        res.json({message: 'Created!'});
+              res.send({message: 'Updated!'});
+          });
+        } else {
+          console.log('does not exist, creating');
+          post.save(function(err) {
+            if (err)
+              res.send(err);
+
+            res.json({message: 'Created'});
+          });
+        }
+
       });
     } else {
       res.json({message: 'whodis?'});

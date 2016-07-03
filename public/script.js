@@ -1,6 +1,7 @@
 
 hljs.initHighlightingOnLoad();  // is this what I do?
 var pad;
+var serverUrl = 'http://' + location.hostname + ':8000/api/';
 // public/script.js
 window.onload = function() {
 
@@ -47,7 +48,7 @@ function postData(whodat, secret, t, date) {
   }
 
   var http = new XMLHttpRequest();
-  var url = 'http://'+ location.hostname +':8000/api/post';
+  var url = serverUrl + 'post';
   http.onreadystatechange = function() {
     console.log("send");
     if (http.readyState === 4 && http.status === 200) {
@@ -73,6 +74,29 @@ function postData(whodat, secret, t, date) {
   http.send(JSON.stringify(data));
 }
 
+function retrieve() {
+  var title = document.getElementById('titlearea').value;
+  console.log(title);
+
+  var http = new XMLHttpRequest();
+  var url = serverUrl + 'getpost?title=' + title;
+  http.onreadystatechange = function() {
+    if (http.readyState === 4 && http.status === 200){
+      var msg = JSON.parse(http.response);
+      var markdownArea = document.getElementById('pad');
+      //var converter = new showdown.Converter();
+
+      if (msg[0]) {
+        markdownArea.value = msg[0].blog;
+        console.log(msg[0].updated_at);
+      }
+    }
+  }
+
+  http.open('GET', url, true);
+  http.setRequestHeader('Content-Type', 'application/json');
+  http.send(name);
+}
 
 
 
