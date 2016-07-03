@@ -5,7 +5,7 @@ html, body, section, .full-height {
   height: 100%;
 }
 a {
-  color: #7b584a;
+  color: darkred;
 }
 
 #pad {
@@ -53,10 +53,13 @@ a {
 .pont-pic {
   height: 150%;
   float: left;
+  width: 11.7%;
 }
 .pont-pic-right {
   height: 150%;
   float: right;
+  width: 11.7%;
+  margin-right: -0.85%;
 }
 
 .bp-archive {
@@ -71,7 +74,9 @@ a {
   margin-top: 5px;
   border-top-right-radius: 3px;
   overflow-y: scroll;
-
+  width: 51.6%;
+  font-family: 'Arvo', serif;
+  font-size: 16px;
 }
 ::-webkit-scrollbar {
   width: 12px;
@@ -88,6 +93,3 @@ a {
   margin-left: 10%;
   font-size: 18px;
 }
-/* .bp-postlist {
-  display: none;
-} */
