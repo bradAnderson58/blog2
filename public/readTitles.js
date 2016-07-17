@@ -84,6 +84,7 @@ function toggleListSize() {
 function openPost(name) {
   console.log(name);
   var http = new XMLHttpRequest();
+  name = doEncode(name);
   var url = baseUrl + '/api/getpost?title='+name;
   http.onreadystatechange = function() {
     if (http.readyState === 4 && http.status === 200){
@@ -106,6 +107,17 @@ function openPost(name) {
   http.send(name);
 }
 
+function doEncode(name) {
+  var alt = '';
+  for(var c in name) {
+    if (name.charAt(c) === '+')
+      alt += '%2B';
+    else
+      alt += name.charAt(c);
+  }
+  console.log(alt);
+  return alt;
+}
 
 
 
