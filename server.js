@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
-// listen on port 8000 or defined port
-var port = process.env.PORT || 8000;
+// listen on port default port or defined port
+var port = process.env.PORT || 80;
 var theName;
 var thePass;
 fs.readFile('config', 'utf8', function(err, data) {

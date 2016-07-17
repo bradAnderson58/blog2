@@ -1,7 +1,7 @@
 
 hljs.initHighlightingOnLoad();  // is this what I do?
 var pad;
-var serverUrl = 'http://' + location.hostname + ':8000/api/';
+var serverUrl = 'http://' + location.hostname + '/api/';
 // public/script.js
 window.onload = function() {
 

@@ -1,4 +1,5 @@
 hljs.initHighlightingOnLoad();
+var baseUrl = 'http://' + location.hostname;
 
 window.onload = function() {
 
@@ -7,7 +8,7 @@ window.onload = function() {
   var titleCont;
 
   var http = new XMLHttpRequest();
-  var url = 'http://' + location.hostname + ':8000/api/titles';
+  var url = baseUrl + '/api/titles';
   http.onreadystatechange = function() {
     if (http.readyState === 4 && http.status === 200){
       var msg = JSON.parse(http.response);
@@ -83,7 +84,7 @@ function toggleListSize() {
 function openPost(name) {
   console.log(name);
   var http = new XMLHttpRequest();
-  var url = 'http://' + location.hostname + ':8000/api/getpost?title='+name;
+  var url = baseUrl + '/api/getpost?title='+name;
   http.onreadystatechange = function() {
     if (http.readyState === 4 && http.status === 200){
       var msg = JSON.parse(http.response);
