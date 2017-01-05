@@ -68,6 +68,7 @@ a {
   width: 25.8%;
   border-right: 1px solid black;
   border-top-left-radius: 3px;
+  overflow-y: scroll;
 }
 .bp-poast {
   background: #ace5ac;
